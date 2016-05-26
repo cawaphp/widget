@@ -1,0 +1,14 @@
+.cawa-google-map {
+    max-width: 100%;
+    padding-bottom: 50%; // This is the aspect ratio
+    position: relative;
+    height: 0;
+
+    & > div {
+        position: absolute;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+}
