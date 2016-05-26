@@ -145,15 +145,15 @@ class Marker implements \JsonSerializable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         $return = get_object_vars($this);
-        unset($return["latitude"]);
-        unset($return["longitude"]);
+        unset($return['latitude']);
+        unset($return['longitude']);
 
-        $return["position"] = ["lat" => $this->latitude, "lng" => $this->longitude];
+        $return['position'] = ['lat' => $this->latitude, 'lng' => $this->longitude];
 
         return $return;
     }

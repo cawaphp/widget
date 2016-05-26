@@ -32,7 +32,7 @@ class Carousel extends HtmlContainer
     public function __construct()
     {
         parent::__construct('<div>');
-        $this->addClass("cawa-carousel");
+        $this->addClass('cawa-carousel');
         $this->widgetOptions = new WidgetOption();
     }
 
@@ -46,7 +46,7 @@ class Carousel extends HtmlContainer
      */
     public function setRows(int $row) : self
     {
-        $this->widgetOptions->addData("rows", $row);
+        $this->widgetOptions->addData('rows', $row);
 
         return $this;
     }
@@ -60,7 +60,7 @@ class Carousel extends HtmlContainer
      */
     public function setSlidesPerRow(int $slide) : self
     {
-        $this->widgetOptions->addData("slidesPerRow", $slide);
+        $this->widgetOptions->addData('slidesPerRow', $slide);
 
         return $this;
     }
@@ -74,7 +74,7 @@ class Carousel extends HtmlContainer
      */
     public function setDots(bool $dots = false) : self
     {
-        $this->widgetOptions->addData("slidesPerRow", $dots);
+        $this->widgetOptions->addData('slidesPerRow', $dots);
 
         return $this;
     }
@@ -88,7 +88,7 @@ class Carousel extends HtmlContainer
      */
     public function setArrows(bool $arrows = false) : self
     {
-        $this->widgetOptions->addData("arrows", $arrows);
+        $this->widgetOptions->addData('arrows', $arrows);
 
         return $this;
     }
@@ -102,7 +102,7 @@ class Carousel extends HtmlContainer
      */
     public function setAutoplay(bool $autoplay = true) : self
     {
-        $this->widgetOptions->addData("autoplay", $autoplay);
+        $this->widgetOptions->addData('autoplay', $autoplay);
 
         return $this;
     }
@@ -116,7 +116,7 @@ class Carousel extends HtmlContainer
      */
     public function setInfinite(bool $infinite = false) : self
     {
-        $this->widgetOptions->addData("infinite", $infinite);
+        $this->widgetOptions->addData('infinite', $infinite);
 
         return $this;
     }
@@ -131,7 +131,7 @@ class Carousel extends HtmlContainer
      */
     public function setCenterMode(bool $centerMode = true) : self
     {
-        $this->widgetOptions->addData("centerMode", $centerMode);
+        $this->widgetOptions->addData('centerMode', $centerMode);
 
         return $this;
     }
@@ -145,7 +145,7 @@ class Carousel extends HtmlContainer
      */
     public function setVertical(bool $vertical = true) : self
     {
-        $this->widgetOptions->addData("vertical", $vertical);
+        $this->widgetOptions->addData('vertical', $vertical);
 
         return $this;
     }
@@ -156,7 +156,7 @@ class Carousel extends HtmlContainer
     public function add(ViewController ...$elements)
     {
         foreach ($elements as $element) {
-            parent::addFirst(HtmlContainer::create("<div>")->add($element));
+            parent::addFirst(HtmlContainer::create('<div>')->add($element));
         }
 
         return $this;
@@ -168,7 +168,7 @@ class Carousel extends HtmlContainer
     public function addFirst(ViewController ...$elements)
     {
         foreach ($elements as $element) {
-            parent::addFirst(HtmlContainer::create("<div>")->add($element));
+            parent::addFirst(HtmlContainer::create('<div>')->add($element));
         }
 
         return $this;

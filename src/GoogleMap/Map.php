@@ -22,10 +22,10 @@ use Cawa\Renderer\WidgetOption;
 
 class Map extends HtmlContainer
 {
-    const TYPE_ROADMAP = "roadmap";
-    const TYPE_SATELLITE = "satellite";
-    const TYPE_HYBRID = "hybrid";
-    const TYPE_TERRAIN = "terrain";
+    const TYPE_ROADMAP = 'roadmap';
+    const TYPE_SATELLITE = 'satellite';
+    const TYPE_HYBRID = 'hybrid';
+    const TYPE_TERRAIN = 'terrain';
 
     /**
      * @var WidgetOption
@@ -38,7 +38,7 @@ class Map extends HtmlContainer
     public function __construct()
     {
         parent::__construct('<div>');
-        $this->addClass("cawa-google-map");
+        $this->addClass('cawa-google-map');
         $this->add(HtmlElement::create('<div>'));
 
         $this->widgetOptions = new WidgetOption(['key' => DI::config()->get('googlemaps/apikey')]);
@@ -53,7 +53,7 @@ class Map extends HtmlContainer
      */
     public function setCoordinates(float $lat, float $long) : self
     {
-        $this->widgetOptions->addData("map", ["center" => ['lat' => $lat, 'lng' => $long]]);
+        $this->widgetOptions->addData('map', ['center' => ['lat' => $lat, 'lng' => $long]]);
 
         return $this;
     }
@@ -65,7 +65,7 @@ class Map extends HtmlContainer
      */
     public function setZoom(int $zoom) : self
     {
-        $this->widgetOptions->addData("map", ["zoom" => $zoom]);
+        $this->widgetOptions->addData('map', ['zoom' => $zoom]);
 
         return $this;
     }
@@ -77,7 +77,7 @@ class Map extends HtmlContainer
      */
     public function setMapType(string $type) : self
     {
-        $this->widgetOptions->addData("map", ["mapTypeId" => $type]);
+        $this->widgetOptions->addData('map', ['mapTypeId' => $type]);
 
         return $this;
     }
@@ -89,7 +89,7 @@ class Map extends HtmlContainer
      */
     public function setDefaultUi(bool $defaultUi = false) : self
     {
-        $this->widgetOptions->addData("map", ["disableDefaultUI" => !$defaultUi]);
+        $this->widgetOptions->addData('map', ['disableDefaultUI' => !$defaultUi]);
 
         return $this;
     }
@@ -101,7 +101,7 @@ class Map extends HtmlContainer
      */
     public function setClickableIcons(bool $clickableIcons) : self
     {
-        $this->widgetOptions->addData("map", ["clickableIcons" => $clickableIcons]);
+        $this->widgetOptions->addData('map', ['clickableIcons' => $clickableIcons]);
 
         return $this;
     }
@@ -113,7 +113,7 @@ class Map extends HtmlContainer
      */
     public function setDraggable(int $draggable) : self
     {
-        $this->widgetOptions->addData("map", ["draggable" => $draggable]);
+        $this->widgetOptions->addData('map', ['draggable' => $draggable]);
 
         return $this;
     }
@@ -125,7 +125,7 @@ class Map extends HtmlContainer
      */
     public function addMarker(Marker $marker)
     {
-        $this->widgetOptions->addData("markers", [$marker]);
+        $this->widgetOptions->addData('markers', [$marker]);
 
         return $this;
     }

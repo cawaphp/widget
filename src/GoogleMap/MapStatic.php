@@ -15,25 +15,22 @@ namespace Cawa\Widget\GoogleMap;
 
 use Cawa\Core\DI;
 use Cawa\Net\Uri;
-use Cawa\Renderer\Container;
-use Cawa\Renderer\Element;
 use Cawa\Renderer\HtmlElement;
-use Cawa\Renderer\WidgetOption;
 
 class MapStatic extends HtmlElement
 {
-    const FORMAT_PNG8 = "png8";
-    const FORMAT_PNG32 = "png32";
-    const FORMAT_GIF = "gif";
-    const FORMAT_JPG = "jpg";
-    const FORMAT_JPGBASELINE = "jpg-baseline";
+    const FORMAT_PNG8 = 'png8';
+    const FORMAT_PNG32 = 'png32';
+    const FORMAT_GIF = 'gif';
+    const FORMAT_JPG = 'jpg';
+    const FORMAT_JPGBASELINE = 'jpg-baseline';
 
     /**
      * {@inheritdoc}
      */
     public function __construct()
     {
-        parent::__construct("<img />");
+        parent::__construct('<img />');
 
         $this->queries['key'] = DI::config()->get('googlemaps/apikey');
     }
@@ -49,12 +46,12 @@ class MapStatic extends HtmlElement
     public function render()
     {
         if ($sign = DI::config()->getIfExists('googlemaps/secret')) {
-            $binarySign = base64_decode(str_replace(['-', '_'], ['+', '/'] , $sign));
+            $binarySign = base64_decode(str_replace(['-', '_'], ['+', '/'], $sign));
             $hmac = hash_hmac('sha1', $this->getUrl(true), $binarySign, true);
-            $this->queries['signature'] = str_replace(['+', '/'],['-', '_'], base64_encode($hmac));
+            $this->queries['signature'] = str_replace(['+', '/'], ['-', '_'], base64_encode($hmac));
         }
 
-        $this->addAttribute("src", $this->getUrl(false));
+        $this->addAttribute('src', $this->getUrl(false));
 
         return parent::render();
     }
@@ -66,7 +63,7 @@ class MapStatic extends HtmlElement
      */
     private function getUrl(bool $relative = true) : string
     {
-        $uri = new Uri("https://maps.googleapis.com/maps/api/staticmap");
+        $uri = new Uri('https://maps.googleapis.com/maps/api/staticmap');
         $uri->addQueries($this->queries);
         $url = $uri->get($relative);
 
@@ -123,13 +120,12 @@ class MapStatic extends HtmlElement
      */
     public function setSize(int $width, int $height) : self
     {
-        $this->queries['size'] = $width . "x" . $height;
+        $this->queries['size'] = $width . 'x' . $height;
 
         return $this;
     }
 
     /**
-     *
      * @param int $scale
      *
      * @return $this|MapStatic
@@ -208,12 +204,12 @@ class MapStatic extends HtmlElement
         $markerQuery = [];
 
         if ($marker->getLabel()) {
-            $markerQuery[] = "label:" . $marker->getLabel();
+            $markerQuery[] = 'label:' . $marker->getLabel();
         }
 
-        $markerQuery[] = $marker->getLatitude() . "," . $marker->getLongitude();
+        $markerQuery[] = $marker->getLatitude() . ',' . $marker->getLongitude();
 
-        $this->queries['markers'][] = implode("|", $markerQuery);
+        $this->queries['markers'][] = implode('|', $markerQuery);
 
         return $this;
     }
