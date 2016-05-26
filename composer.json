@@ -1,0 +1,24 @@
+{
+    "name": "cawaphp/widget",
+    "description": "Сáша widget",
+    "keywords": ["cawa", "widget"],
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "tchiotludo"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Cawa\\Widget\\": "src"
+        }
+    },
+    "require": {
+        "php": "~7.0",
+        "cawaphp/cawa" : "dev-master",
+
+        "intervention/image": "^2.3"
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "cawa-widget",
+    "description": "",
+    "homepage": "https://github.com/cawaphp/widget",
+    "authors": [
+        "tchiotludo"
+    ],
+    "main": [
+    ],
+    "moduleType": [
+        "amd"
+    ],
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "license": "GPL-3.0",
+    "dependencies": {
+        "slick-carousel": "^1.6.0"
+    }
+}

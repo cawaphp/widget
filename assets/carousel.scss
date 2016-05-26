@@ -1,0 +1,13 @@
+.cawa-carousel {
+    max-width: 100%;
+    height: auto;
+    visibility: hidden;
+
+    .slick-slide {
+        height: auto;
+
+        img {
+            max-width: 100%;
+        }
+    }
+}
