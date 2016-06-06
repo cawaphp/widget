@@ -13,12 +13,8 @@ declare (strict_types = 1);
 
 namespace Cawa\Widget\GoogleMap;
 
-use Cawa\Orm\ObjectTrait;
-
 class Marker implements \JsonSerializable
 {
-    use ObjectTrait;
-
     /**
      * @param float $lat
      * @param float $long

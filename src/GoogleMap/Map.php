@@ -39,7 +39,7 @@ class Map extends HtmlContainer
     {
         parent::__construct('<div>');
         $this->addClass('cawa-google-map');
-        $this->add(HtmlElement::create('<div>'));
+        $this->add((new HtmlElement('<div>')));
 
         $this->widgetOptions = new WidgetOption(['key' => DI::config()->get('googlemaps/apikey')]);
         $this->setZoom(15);

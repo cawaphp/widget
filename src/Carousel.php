@@ -156,7 +156,7 @@ class Carousel extends HtmlContainer
     public function add(ViewController ...$elements)
     {
         foreach ($elements as $element) {
-            parent::add(HtmlContainer::create('<div>')->add($element));
+            parent::add((new HtmlContainer('<div>'))->add($element));
         }
 
         return $this;
@@ -168,7 +168,7 @@ class Carousel extends HtmlContainer
     public function addFirst(ViewController ...$elements)
     {
         foreach ($elements as $element) {
-            parent::addFirst(HtmlContainer::create('<div>')->add($element));
+            parent::addFirst((new HtmlContainer('<div>'))->add($element));
         }
 
         return $this;
