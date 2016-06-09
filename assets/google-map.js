@@ -115,7 +115,9 @@ $.widget("cawa.google-map", $.cawa.widget, {
         var center = map.getCenter();
         google.maps.event.trigger(map, "resize");
         map.setCenter(center);
-        map.fitBounds(bounds);
+        if (!bounds.isEmpty()) {
+            map.fitBounds(bounds);
+        }
     }
 
 });
