@@ -47,6 +47,18 @@ class Map extends HtmlContainer
     }
 
     /**
+     * @param string $ratio
+     *
+     * @return $this
+     */
+    public function setRatio(string $ratio) : self
+    {
+        $this->addClass('ratio-' . str_replace('/', '-', $ratio));
+
+        return $this;
+    }
+
+    /**
      * @param float $lat
      * @param float $long
      *

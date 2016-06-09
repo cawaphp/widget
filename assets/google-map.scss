@@ -4,6 +4,18 @@
     position: relative;
     height: 0;
 
+    &.ratio-16-9 {
+        padding-bottom: 56.25%;
+    }
+
+    &.ratio-16-10 {
+        padding-bottom: 62.5%;
+    }
+
+    &.ratio-1-1 {
+        padding-bottom: 100%;
+    }
+
     & > div {
         position: absolute;
         margin: 0;
