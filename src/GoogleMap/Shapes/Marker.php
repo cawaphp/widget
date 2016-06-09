@@ -11,44 +11,47 @@
 
 declare (strict_types = 1);
 
-namespace Cawa\Widget\GoogleMap;
+namespace Cawa\Widget\GoogleMap\Shapes;
 
-class Marker implements \JsonSerializable
+class Marker extends AbstractShape implements \JsonSerializable
 {
+    /**
+     * @return string
+     */
+    protected function getType() : string
+    {
+        return 'Marker';
+    }
+
     /**
      * @param float $lat
      * @param float $long
      */
     public function __construct(float $lat, float $long)
     {
-        $this->latitude = $lat;
-        $this->longitude = $long;
+        $this->position['lat'] = $lat;
+        $this->position['lng'] = $long;
     }
 
     /**
-     * @var float
+     * @var array
      */
-    private $latitude;
+    protected $position = ['lat' => null, 'lng' => null];
 
     /**
      * @return float
      */
     public function getLatitude() : float
     {
-        return $this->latitude;
+        return $this->position['lng'];
     }
-
-    /**
-     * @var float
-     */
-    private $longitude;
 
     /**
      * @return float
      */
     public function getLongitude() : float
     {
-        return $this->longitude;
+        return $this->position['lat'];
     }
 
     /**
@@ -59,8 +62,8 @@ class Marker implements \JsonSerializable
      */
     public function setCoordinates(float $lat, float $long) : self
     {
-        $this->latitude = $lat;
-        $this->longitude = $long;
+        $this->position['lat'] = $lat;
+        $this->position['lng'] = $long;
 
         return $this;
     }
@@ -68,7 +71,7 @@ class Marker implements \JsonSerializable
     /**
      * @var string
      */
-    private $label;
+    protected $label;
 
     /**
      * @return string
@@ -93,7 +96,7 @@ class Marker implements \JsonSerializable
     /**
      * @var string
      */
-    private $title;
+    protected $title;
 
     /**
      * @return string
@@ -118,7 +121,7 @@ class Marker implements \JsonSerializable
     /**
      * @var string
      */
-    private $content;
+    protected $content;
 
     /**
      * @return string
@@ -138,19 +141,5 @@ class Marker implements \JsonSerializable
         $this->content = $content;
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function jsonSerialize()
-    {
-        $return = get_object_vars($this);
-        unset($return['latitude']);
-        unset($return['longitude']);
-
-        $return['position'] = ['lat' => $this->latitude, 'lng' => $this->longitude];
-
-        return $return;
     }
 }

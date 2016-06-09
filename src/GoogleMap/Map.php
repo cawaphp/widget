@@ -19,6 +19,7 @@ use Cawa\Renderer\Element;
 use Cawa\Renderer\HtmlContainer;
 use Cawa\Renderer\HtmlElement;
 use Cawa\Renderer\WidgetOption;
+use Cawa\Widget\GoogleMap\Shapes\AbstractShape;
 
 class Map extends HtmlContainer
 {
@@ -119,13 +120,13 @@ class Map extends HtmlContainer
     }
 
     /**
-     * @param Marker $marker
+     * @param AbstractShape $shape
      *
      * @return $this
      */
-    public function addMarker(Marker $marker)
+    public function addShape(AbstractShape $shape)
     {
-        $this->widgetOptions->addData('markers', [$marker]);
+        $this->widgetOptions->addData('shapes', [$shape]);
 
         return $this;
     }
