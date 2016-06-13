@@ -10,4 +10,20 @@
             max-width: 100%;
         }
     }
+    .slick-prev, .slick-next {
+        z-index: 2;
+    }
+
+    .slick-prev:before, .slick-next:before {
+        color: #000;
+        text-shadow: 0 0 5px #FFF;
+    }
+
+    .slick-prev {
+        left: 5px;
+    }
+
+    .slick-next {
+        right: 5px;
+    }
 }
