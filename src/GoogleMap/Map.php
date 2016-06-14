@@ -108,6 +108,24 @@ class Map extends HtmlContainer
     }
 
     /**
+     * @param bool $interaction
+     *
+     * @return Map
+     */
+    public function setInteraction(bool $interaction = false) : self
+    {
+        $this->widgetOptions->addData('map', [
+            'draggable' => $interaction,
+            'zoomControl' => $interaction,
+            'scrollwheel' => $interaction,
+            'disableDoubleClickZoom' => !$interaction,
+        ]);
+
+        return $this;
+
+    }
+
+    /**
      * @param bool $clickableIcons
      *
      * @return $this
