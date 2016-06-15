@@ -122,7 +122,6 @@ class Map extends HtmlContainer
         ]);
 
         return $this;
-
     }
 
     /**
