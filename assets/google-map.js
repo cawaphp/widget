@@ -24,7 +24,8 @@ $.widget("cawa.google-map", $.cawa.widget, {
 
         GoogleMapsLoader.KEY = this.options.key;
         GoogleMapsLoader.LANGUAGE = $.locale();
-
+        // TODO: remove libraries, unecessary for map, but needed by google place
+        GoogleMapsLoader.LIBRARIES = ['geometry', 'places'];
         GoogleMapsLoader.load(function(google) {
             self._google = google;
             self._loadMap()

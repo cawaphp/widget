@@ -2,6 +2,11 @@
     max-width: 100%;
     height: auto;
     visibility: hidden;
+    margin-bottom: $line-height-computed;
+
+    &.slick-dotted.slick-slider {
+        margin-bottom: $line-height-computed + 30;
+    }
 
     .slick-slide {
         height: auto;
