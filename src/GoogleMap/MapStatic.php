@@ -32,7 +32,7 @@ class MapStatic extends HtmlElement
     {
         parent::__construct('<img />');
 
-        $this->queries['key'] = DI::config()->get('googlemaps/apikey');
+        $this->queries['key'] = DI::config()->get('googleMaps/apikey');
     }
 
     /**
@@ -45,7 +45,7 @@ class MapStatic extends HtmlElement
      */
     public function render()
     {
-        if ($sign = DI::config()->getIfExists('googlemaps/secret')) {
+        if ($sign = DI::config()->getIfExists('googleMaps/secret')) {
             $binarySign = base64_decode(str_replace(['-', '_'], ['+', '/'], $sign));
             $hmac = hash_hmac('sha1', $this->getUrl(true), $binarySign, true);
             $this->queries['signature'] = str_replace(['+', '/'], ['-', '_'], base64_encode($hmac));

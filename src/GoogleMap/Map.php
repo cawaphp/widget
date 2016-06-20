@@ -42,7 +42,7 @@ class Map extends HtmlContainer
         $this->addClass('cawa-google-map');
         $this->add((new HtmlElement('<div>')));
 
-        $this->widgetOptions = new WidgetOption(['key' => DI::config()->get('googlemaps/apikey')]);
+        $this->widgetOptions = new WidgetOption(['key' => DI::config()->get('googleMaps/apikey')]);
         $this->setZoom(15);
     }
 
