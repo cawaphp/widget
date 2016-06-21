@@ -43,7 +43,7 @@ class Marker extends AbstractShape implements \JsonSerializable
      */
     public function getLatitude() : float
     {
-        return $this->position['lng'];
+        return $this->position['lat'];
     }
 
     /**
@@ -51,7 +51,7 @@ class Marker extends AbstractShape implements \JsonSerializable
      */
     public function getLongitude() : float
     {
-        return $this->position['lat'];
+        return $this->position['lng'];
     }
 
     /**

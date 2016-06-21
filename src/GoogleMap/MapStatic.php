@@ -16,9 +16,15 @@ namespace Cawa\Widget\GoogleMap;
 use Cawa\Core\DI;
 use Cawa\Net\Uri;
 use Cawa\Renderer\HtmlElement;
+use Cawa\Widget\GoogleMap\Shapes\AbstractShape;
+use Cawa\Widget\GoogleMap\Shapes\Circle;
+use Cawa\Widget\GoogleMap\Shapes\Marker;
+use emcconville\Polyline\GoogleTrait;
 
 class MapStatic extends HtmlElement
 {
+    use GoogleTrait;
+
     const FORMAT_PNG8 = 'png8';
     const FORMAT_PNG32 = 'png32';
     const FORMAT_GIF = 'gif';
@@ -69,6 +75,7 @@ class MapStatic extends HtmlElement
 
         // google maps expect markers=...&markers=...
         $url = preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $url);
+        $url = str_replace('%2C', ',', $url);
 
         return $url;
     }
@@ -81,7 +88,7 @@ class MapStatic extends HtmlElement
      */
     public function setCoordinates(float $lat, float $long) : self
     {
-        $this->queries['center'] = $lat . 'x' . $long;
+        $this->queries['center'] = $lat . ',' . $long;
 
         return $this;
     }
@@ -93,7 +100,7 @@ class MapStatic extends HtmlElement
      */
     public function setZoom(int $zoom) : self
     {
-        $this->queries['zoom'] = $zoom;
+        $this->queries['zoom'] = (string) $zoom;
 
         return $this;
     }
@@ -191,26 +198,80 @@ class MapStatic extends HtmlElement
     }
 
     /**
-     * @param Marker $marker
+     * @param AbstractShape $shape
      *
      * @return $this
      */
-    public function addMarker(Marker $marker)
+    public function addShape(AbstractShape $shape)
     {
-        if (!isset($this->queries['markers'])) {
-            $this->queries['markers'] = [];
+        if ($shape instanceof Marker) {
+            if (!isset($this->queries['markers'])) {
+                $this->queries['markers'] = [];
+            }
+
+            $markerQuery = [];
+
+            if ($shape->getLabel()) {
+                $markerQuery[] = 'label:' . $shape->getLabel();
+            }
+
+            $markerQuery[] = round($shape->getLatitude(), 6) . ',' . round($shape->getLongitude(), 6);
+
+            $this->queries['markers'][] = implode('|', $markerQuery);
+        } else if ($shape instanceof Circle) {
+            if (!isset($this->queries['path'])) {
+                $this->queries['path'] = [];
+            }
+
+            $pathQuery = [];
+            $pathQuery[] = 'color:0x' . substr($shape->getStrokeColor(), 1) . dechex(255 * $shape->getStrokeOpacity());
+            $pathQuery[] = 'fillcolor:0x' . substr($shape->getFillColor(), 1) . dechex(255 * $shape->getFillOpacity());
+            $pathQuery[] = 'weight:' . $shape->getStrokeWeight();
+            $pathQuery[] = 'enc:' . $this->getCircleEncoded(
+                $shape->getLatitude(),
+                $shape->getLongitude(),
+                $shape->getRadius() / 1000
+            );
+
+            $this->queries['path'][] = implode('|', $pathQuery);
+
+        } else {
+            throw new \InvalidArgumentException(sprintf("Unexpected type '%s'", get_class($shape)));
         }
-
-        $markerQuery = [];
-
-        if ($marker->getLabel()) {
-            $markerQuery[] = 'label:' . $marker->getLabel();
-        }
-
-        $markerQuery[] = $marker->getLatitude() . ',' . $marker->getLongitude();
-
-        $this->queries['markers'][] = implode('|', $markerQuery);
 
         return $this;
+    }
+
+    /**
+     * @param float $lat
+     * @param $lng
+     * @param $radius
+     * @param int $detail
+     *
+     * @return mixed
+     */
+    private function getCircleEncoded(float $lat, $lng, $radius, $detail = 8) : string
+    {
+        $R = 6371;
+
+        $pi = pi();
+
+        $lat = ($lat * $pi) / 180;
+        $lng = ($lng * $pi) / 180;
+        $d = $radius / $R;
+
+        $points = [];
+
+        for ($i = 0; $i <= 360; $i += $detail):
+            $brng = $i * $pi / 180;
+
+            $pLat = asin(sin($lat) * cos($d) + cos($lat) * sin($d) * cos($brng));
+            $pLng = (($lng + atan2(sin($brng) * sin($d) * cos($lat), cos($d) - sin($lat) * sin($pLat))) * 180) / $pi;
+            $pLat = ($pLat * 180) / $pi;
+
+            $points[] = [$pLat, $pLng];
+        endfor;
+
+        return $this->encodePoints($points);
     }
 }

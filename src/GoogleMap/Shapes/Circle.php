@@ -45,7 +45,7 @@ class Circle extends AbstractShape
      */
     public function getLatitude() : float
     {
-        return $this->center['lng'];
+        return $this->center['lat'];
     }
 
     /**
@@ -53,7 +53,7 @@ class Circle extends AbstractShape
      */
     public function getLongitude() : float
     {
-        return $this->center['lat'];
+        return $this->center['lng'];
     }
 
     /**
