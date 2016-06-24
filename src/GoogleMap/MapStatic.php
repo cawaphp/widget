@@ -139,7 +139,7 @@ class MapStatic extends HtmlElement
      */
     public function setScale(int $scale) : self
     {
-        $this->queries['scale'] = $scale;
+        $this->queries['scale'] = (string) $scale;
 
         return $this;
     }
