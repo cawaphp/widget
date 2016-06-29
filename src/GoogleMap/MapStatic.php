@@ -218,7 +218,7 @@ class MapStatic extends HtmlElement
             $markerQuery[] = round($shape->getLatitude(), 6) . ',' . round($shape->getLongitude(), 6);
 
             $this->queries['markers'][] = implode('|', $markerQuery);
-        } else if ($shape instanceof Circle) {
+        } elseif ($shape instanceof Circle) {
             if (!isset($this->queries['path'])) {
                 $this->queries['path'] = [];
             }
@@ -234,7 +234,6 @@ class MapStatic extends HtmlElement
             );
 
             $this->queries['path'][] = implode('|', $pathQuery);
-
         } else {
             throw new \InvalidArgumentException(sprintf("Unexpected type '%s'", get_class($shape)));
         }
@@ -262,14 +261,14 @@ class MapStatic extends HtmlElement
 
         $points = [];
 
-        for ($i = 0; $i <= 360; $i += $detail):
+        for ($i = 0; $i <= 360; $i += $detail) :
             $brng = $i * $pi / 180;
 
-            $pLat = asin(sin($lat) * cos($d) + cos($lat) * sin($d) * cos($brng));
-            $pLng = (($lng + atan2(sin($brng) * sin($d) * cos($lat), cos($d) - sin($lat) * sin($pLat))) * 180) / $pi;
-            $pLat = ($pLat * 180) / $pi;
+        $pLat = asin(sin($lat) * cos($d) + cos($lat) * sin($d) * cos($brng));
+        $pLng = (($lng + atan2(sin($brng) * sin($d) * cos($lat), cos($d) - sin($lat) * sin($pLat))) * 180) / $pi;
+        $pLat = ($pLat * 180) / $pi;
 
-            $points[] = [$pLat, $pLng];
+        $points[] = [$pLat, $pLng];
         endfor;
 
         return $this->encodePoints($points);
