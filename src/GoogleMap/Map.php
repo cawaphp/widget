@@ -47,12 +47,23 @@ class Map extends HtmlContainer
     }
 
     /**
+     * @return $this
+     */
+    public function resetRatio() : self
+    {
+        $this->addAttribute('class', preg_replace('/ratio-[0-9]+-[0-9]+/', '', $this->getAttribute('class')));
+
+        return $this;
+    }
+
+    /**
      * @param string $ratio
      *
      * @return $this
      */
     public function setRatio(string $ratio) : self
     {
+        $this->resetRatio();
         $this->addClass('ratio-' . str_replace('/', '-', $ratio));
 
         return $this;

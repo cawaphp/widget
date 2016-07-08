@@ -4,6 +4,10 @@
     position: relative;
     height: 0;
 
+    &.ratio-2-1 {
+        padding-bottom: 50%;
+    }
+
     &.ratio-16-9 {
         padding-bottom: 56.25%;
     }
