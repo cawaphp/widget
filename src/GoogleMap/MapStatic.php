@@ -51,15 +51,22 @@ class MapStatic extends HtmlElement
      */
     public function render()
     {
-        if ($sign = DI::config()->getIfExists('googleMaps/secret')) {
-            $binarySign = base64_decode(str_replace(['-', '_'], ['+', '/'], $sign));
-            $hmac = hash_hmac('sha1', $this->getUrl(true), $binarySign, true);
-            $this->queries['signature'] = str_replace(['+', '/'], ['-', '_'], base64_encode($hmac));
-        }
-
-        $this->addAttribute('src', $this->getUrl(false));
+        $this->addAttribute('src', $this->getUrl());
 
         return parent::render();
+    }
+
+    /**
+     * @var bool
+     */
+    private $hmacAdded = false;
+
+    /**
+     * @return string
+     */
+    public function getUrl() : string
+    {
+        return $this->generateUrl(false);
     }
 
     /**
@@ -67,8 +74,16 @@ class MapStatic extends HtmlElement
      *
      * @return string
      */
-    private function getUrl(bool $relative = true) : string
+    public function generateUrl(bool $relative = false) : string
     {
+        if (!$this->hmacAdded && !$relative && $sign = DI::config()->getIfExists('googleMaps/secret')) {
+            $binarySign = base64_decode(str_replace(['-', '_'], ['+', '/'], $sign));
+            $hmac = hash_hmac('sha1', $this->generateUrl(true), $binarySign, true);
+            $this->queries['signature'] = str_replace(['+', '/'], ['-', '_'], base64_encode($hmac));
+
+            $this->hmacAdded = true;
+        }
+
         $uri = new Uri('https://maps.googleapis.com/maps/api/staticmap');
         $uri->addQueries($this->queries);
         $url = $uri->get($relative);
@@ -264,11 +279,11 @@ class MapStatic extends HtmlElement
         for ($i = 0; $i <= 360; $i += $detail) :
             $brng = $i * $pi / 180;
 
-        $pLat = asin(sin($lat) * cos($d) + cos($lat) * sin($d) * cos($brng));
-        $pLng = (($lng + atan2(sin($brng) * sin($d) * cos($lat), cos($d) - sin($lat) * sin($pLat))) * 180) / $pi;
-        $pLat = ($pLat * 180) / $pi;
+            $pLat = asin(sin($lat) * cos($d) + cos($lat) * sin($d) * cos($brng));
+            $pLng = (($lng + atan2(sin($brng) * sin($d) * cos($lat), cos($d) - sin($lat) * sin($pLat))) * 180) / $pi;
+            $pLat = ($pLat * 180) / $pi;
 
-        $points[] = [$pLat, $pLng];
+            $points[] = [$pLat, $pLng];
         endfor;
 
         return $this->encodePoints($points);
