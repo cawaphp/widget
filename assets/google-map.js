@@ -46,47 +46,55 @@ require([
 
                 var type = value.type;
                 delete value.type;
-                value.map = self._map;
 
-                if (self._shapes[type] == undefined) {
-                    self._shapes[type] = [];
-                }
 
-                switch(type)
-                {
-                    case 'Marker':
-                        var content;
-                        if (value.content) {
-                            content = value.content;
-                            delete value.content;
-                        }
-
-                        var marker = new google.maps.Marker(value);
-                        self._shapes[type].push(marker);
-
-                        if (content) {
-                            var infowindow = new google.maps.InfoWindow({
-                                content: content
-                            });
-
-                            marker.addListener('click', function ()
-                            {
-                                infowindow.open(self._map, marker);
-                            });
-                        }
-                        break;
-                    case 'Circle':
-                        var shape = new google.maps[type](value);
-                        self._shapes[type].push(shape);
-                        google.maps.event.addDomListener(shape, "radius_changed", $.proxy(self.fit, self));
-                        break;
-
-                }
-
+                self.addShape(type, value);
             });
 
             google.maps.event.addDomListener(window, "resize", $.proxy(self._fit, self));
             self.fit();
+        },
+
+        addShape: function(type, options)
+        {
+            var self = this;
+
+            options.map = self._map;
+
+
+            if (self._shapes[type] == undefined) {
+                self._shapes[type] = [];
+            }
+
+            switch (type) {
+                case 'Marker':
+                    var content;
+                    if (options.content) {
+                        content = options.content;
+                        delete options.content;
+                    }
+
+                    var marker = new google.maps.Marker(options);
+                    self._shapes[type].push(marker);
+
+                    if (content) {
+                        var infowindow = new google.maps.InfoWindow({
+                            content: content
+                        });
+
+                        marker.addListener('click', function ()
+                        {
+                            infowindow.open(self._map, marker);
+                        });
+                    }
+                    break;
+                case 'Circle':
+                    var shape = new google.maps.Circle(options);
+                    self._shapes[type].push(shape);
+                    google.maps.event.addDomListener(shape, "radius_changed", $.proxy(self.fit, self));
+
+                    break;
+            }
         },
 
         getShapes: function(type)
