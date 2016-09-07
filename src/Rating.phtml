@@ -1,0 +1,28 @@
+<?php
+
+/*
+ * This file is part of the Сáша framework.
+ *
+ * (c) tchiotludo <http://github.com/tchiotludo>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * @var $this \Cawa\Widget\Rating
+ * @var int $note
+ * @var int $count
+ * @var bool $readOnly
+ * @var string $widgetOptions
+ */
+?>
+<div class="cawa-rating<?= $readOnly ? ' readOnly' : '' ?>">
+    <div class="top" style="width: <?= $note ?>%">
+        <?php for($i=0; $i<$count; $i++): ?><<?= !$readOnly ? 'a' : 'span' ?>>★</<?= !$readOnly ? 'a' : 'span' ?>><?php endfor; ?>
+    </div>
+    <div class="bottom">
+        <?php for($i=0; $i<$count; $i++): ?><<?= !$readOnly ? 'a' : 'span' ?>>★</<?= !$readOnly ? 'a' : 'span' ?>><?php endfor; ?>
+    </div>
+</div>
+<?= $widgetOptions ?>

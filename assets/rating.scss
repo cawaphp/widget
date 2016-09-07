@@ -1,0 +1,52 @@
+$ratings-off-color: #555 !default;
+$ratings-off-shadow: 0 1px 0 lighten($ratings-off-color, 25%) !default;
+
+$ratings-on-color: #FABE28 !default;
+$ratings-on-shadow: $ratings-off-shadow !default;
+
+
+.cawa-rating {
+    unicode-bidi: bidi-override;
+    margin: 0 auto;
+    position: relative;
+    padding: 0;
+
+    font-size: 25px;
+
+    > div > a,
+    > div > span {
+        color: $ratings-off-color;
+        text-shadow: $ratings-off-shadow;
+    }
+
+    > div > a {
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    > .top {
+        > a,
+        > a:hover,
+        > span {
+            color: $ratings-on-color;
+            text-shadow: $ratings-on-shadow;
+        }
+
+        padding: 0;
+        position: absolute;
+        z-index: 1;
+        display: block;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+    > .bottom {
+        padding: 0;
+        display: block;
+        z-index: 0;
+    }
+}
+
+
+
+
