@@ -141,7 +141,7 @@ class Rating extends Phtml
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function render()
     {
