@@ -47,7 +47,7 @@ class Map extends HtmlContainer
     }
 
     /**
-     * @return $this
+     * @return $this|self
      */
     public function resetRatio() : self
     {
@@ -59,7 +59,7 @@ class Map extends HtmlContainer
     /**
      * @param string $ratio
      *
-     * @return $this
+     * @return $this|self
      */
     public function setRatio(string $ratio) : self
     {
@@ -73,7 +73,7 @@ class Map extends HtmlContainer
      * @param float $lat
      * @param float $long
      *
-     * @return $this
+     * @return $this|self
      */
     public function setCoordinates(float $lat, float $long) : self
     {
@@ -85,7 +85,7 @@ class Map extends HtmlContainer
     /**
      * @param int $zoom
      *
-     * @return $this
+     * @return $this|self
      */
     public function setZoom(int $zoom) : self
     {
@@ -97,7 +97,7 @@ class Map extends HtmlContainer
     /**
      * @param string $type
      *
-     * @return $this
+     * @return $this|self
      */
     public function setMapType(string $type) : self
     {
@@ -109,7 +109,7 @@ class Map extends HtmlContainer
     /**
      * @param bool $defaultUi
      *
-     * @return $this
+     * @return $this|self
      */
     public function setDefaultUi(bool $defaultUi = false) : self
     {
@@ -121,7 +121,7 @@ class Map extends HtmlContainer
     /**
      * @param bool $interaction
      *
-     * @return Map
+     * @return $this|self
      */
     public function setInteraction(bool $interaction = false) : self
     {
@@ -138,7 +138,7 @@ class Map extends HtmlContainer
     /**
      * @param bool $clickableIcons
      *
-     * @return $this
+     * @return $this|self
      */
     public function setClickableIcons(bool $clickableIcons) : self
     {
@@ -148,9 +148,9 @@ class Map extends HtmlContainer
     }
 
     /**
-     * @param bool $draggable
+     * @param int $draggable
      *
-     * @return $this
+     * @return $this|self
      */
     public function setDraggable(int $draggable) : self
     {
@@ -162,7 +162,7 @@ class Map extends HtmlContainer
     /**
      * @param AbstractShape $shape
      *
-     * @return $this
+     * @return $this|self
      */
     public function addShape(AbstractShape $shape)
     {

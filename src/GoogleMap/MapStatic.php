@@ -99,7 +99,7 @@ class MapStatic extends HtmlElement
      * @param float $lat
      * @param float $long
      *
-     * @return $this
+     * @return $this|self
      */
     public function setCoordinates(float $lat, float $long) : self
     {
@@ -111,7 +111,7 @@ class MapStatic extends HtmlElement
     /**
      * @param int $zoom
      *
-     * @return $this
+     * @return $this|self
      */
     public function setZoom(int $zoom) : self
     {
@@ -123,7 +123,7 @@ class MapStatic extends HtmlElement
     /**
      * @param string $type
      *
-     * @return $this
+     * @return $this|self
      */
     public function setMapType(string $type) : self
     {
@@ -138,7 +138,7 @@ class MapStatic extends HtmlElement
      * @param int $width
      * @param int $height
      *
-     * @return $this|MapStatic
+     * @return $this|self
      */
     public function setSize(int $width, int $height) : self
     {
@@ -150,7 +150,7 @@ class MapStatic extends HtmlElement
     /**
      * @param int $scale
      *
-     * @return $this|MapStatic
+     * @return $this|self
      */
     public function setScale(int $scale) : self
     {
@@ -169,7 +169,7 @@ class MapStatic extends HtmlElement
      *
      * @param string $format
      *
-     * @return $this
+     * @return $this|self
      */
     public function setFormat(string $format) : self
     {
@@ -187,7 +187,7 @@ class MapStatic extends HtmlElement
      *
      * @param string $language
      *
-     * @return $this
+     * @return $this|self
      */
     public function setLanguage(string $language) : self
     {
@@ -203,7 +203,7 @@ class MapStatic extends HtmlElement
      *
      * @param string $region
      *
-     * @return $this
+     * @return $this|self
      */
     public function setRegion(string $region) : self
     {
@@ -215,7 +215,7 @@ class MapStatic extends HtmlElement
     /**
      * @param AbstractShape $shape
      *
-     * @return $this
+     * @return $this|self
      */
     public function addShape(AbstractShape $shape)
     {

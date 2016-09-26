@@ -60,7 +60,7 @@ class Circle extends AbstractShape
      * @param float $lat
      * @param float $long
      *
-     * @return $this
+     * @return $this|self
      */
     public function setCoordinates(float $lat, float $long) : self
     {
@@ -90,7 +90,7 @@ class Circle extends AbstractShape
      *
      * @param float $radius
      *
-     * @return $this
+     * @return $this|self
      */
     public function setRadius(float $radius) : self
     {
@@ -129,7 +129,7 @@ class Circle extends AbstractShape
      * @param string $fillColor
      * @param float $opacity
      *
-     * @return $this|Circle
+     * @return $this|self
      */
     public function setFill(string $fillColor, float $opacity = 0.25) : self
     {
@@ -183,12 +183,14 @@ class Circle extends AbstractShape
      * @param float $opacity
      * @param int $weight
      *
-     * @return $this
+     * @return $this|self
      */
-    public function setSroke(string $color, float $opacity = 0.6, int $weight = 1) : self
+    public function setStroke(string $color, float $opacity = 0.6, int $weight = 1) : self
     {
         $this->strokeColor = $color;
         $this->strokeOpacity = $opacity;
         $this->strokeWeight = $weight;
+
+        return $this;
     }
 }

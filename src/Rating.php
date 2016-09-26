@@ -51,7 +51,7 @@ class Rating extends Phtml
     /**
      * @param int $note
      *
-     * @return $this
+     * @return $this|self
      */
     public function setNote(int $note) : self
     {
@@ -71,7 +71,7 @@ class Rating extends Phtml
     /**
      * @param bool $readOnly
      *
-     * @return $this
+     * @return $this|self
      */
     public function setReadOnly(bool $readOnly) : self
     {
@@ -91,7 +91,7 @@ class Rating extends Phtml
     /**
      * @param string $url
      *
-     * @return Rating
+     * @return $this|self
      */
     public function setUrl(string $url) : self
     {
@@ -111,7 +111,7 @@ class Rating extends Phtml
     /**
      * @param string $method
      *
-     * @return Rating
+     * @return $this|self
      */
     public function setMethod(string $method) : self
     {
@@ -131,7 +131,7 @@ class Rating extends Phtml
     /**
      * @param string $query
      *
-     * @return Rating
+     * @return $this|self
      */
     public function setQuery(string $query) : self
     {

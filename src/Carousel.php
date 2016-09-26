@@ -42,7 +42,7 @@ class Carousel extends HtmlContainer
      *
      * @param int $row
      *
-     * @return $this
+     * @return $this|self
      */
     public function setRows(int $row) : self
     {
@@ -56,7 +56,7 @@ class Carousel extends HtmlContainer
      *
      * @param int $slide
      *
-     * @return $this
+     * @return $this|self
      */
     public function setSlidesPerRow(int $slide) : self
     {
@@ -70,7 +70,7 @@ class Carousel extends HtmlContainer
      *
      * @param bool $dots
      *
-     * @return $this
+     * @return $this|self
      */
     public function setDots(bool $dots = false) : self
     {
@@ -84,7 +84,7 @@ class Carousel extends HtmlContainer
      *
      * @param bool $arrows
      *
-     * @return $this
+     * @return $this|self
      */
     public function setArrows(bool $arrows = false) : self
     {
@@ -98,7 +98,7 @@ class Carousel extends HtmlContainer
      *
      * @param bool $autoplay
      *
-     * @return $this
+     * @return $this|self
      */
     public function setAutoplay(bool $autoplay = true) : self
     {
@@ -112,7 +112,7 @@ class Carousel extends HtmlContainer
      *
      * @param bool $infinite
      *
-     * @return $this
+     * @return $this|self
      */
     public function setInfinite(bool $infinite = false) : self
     {
@@ -127,7 +127,7 @@ class Carousel extends HtmlContainer
      *
      * @param bool $centerMode
      *
-     * @return $this
+     * @return $this|self
      */
     public function setCenterMode(bool $centerMode = true) : self
     {
@@ -141,7 +141,7 @@ class Carousel extends HtmlContainer
      *
      * @param bool $vertical
      *
-     * @return $this
+     * @return $this|self
      */
     public function setVertical(bool $vertical = true) : self
     {

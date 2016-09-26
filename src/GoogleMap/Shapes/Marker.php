@@ -58,7 +58,7 @@ class Marker extends AbstractShape implements \JsonSerializable
      * @param float $lat
      * @param float $long
      *
-     * @return $this
+     * @return $this|self
      */
     public function setCoordinates(float $lat, float $long) : self
     {
@@ -84,7 +84,7 @@ class Marker extends AbstractShape implements \JsonSerializable
     /**
      * @param string $label
      *
-     * @return $this
+     * @return $this|self
      */
     public function setLabel(string $label) : self
     {
@@ -109,7 +109,7 @@ class Marker extends AbstractShape implements \JsonSerializable
     /**
      * @param string $title
      *
-     * @return $this
+     * @return $this|self
      */
     public function setTitle(string $title) : self
     {
@@ -134,7 +134,7 @@ class Marker extends AbstractShape implements \JsonSerializable
     /**
      * @param string $content
      *
-     * @return $this
+     * @return $this|self
      */
     public function setContent(string $content) : self
     {
