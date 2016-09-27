@@ -1,0 +1,52 @@
+<?php
+
+/*
+ * This file is part of the Сáша framework.
+ *
+ * (c) tchiotludo <http://github.com/tchiotludo>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * @var $this \Cawa\Widget\Wizard\Wizard
+ * @var bool $forward
+ * @var bool $backward
+ * @var int $current
+ * @var array $steps
+ * @var string $content
+ */
+?>
+<div class="cawa-wizard">
+    <div class="steps-container">
+        <ul class="steps">
+            <?php foreach ($steps as $index => $step) : ?>
+            <li<?= $index + 1 < $current ? ' class="complete"' : ($index + 1 == $current ? ' class="active"' : '')?>>
+                <span class="badge<?= $index + 1 < $current ? ' badge-success' : ''?>"><?= $index + 1 ?></span>
+                <?php if ($step['url'] && (($backward && $index + 1 < $current) || ($forward && $index + 1 > $current))) : ?>
+                    <a href="<?= $step['url'] ?>"><?= $step['name'] ?></a>
+                <?php else: ?>
+                    <?= $step['name'] ?>
+                <?php endif; ?>
+                <span class="chevron"></span>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <?php /*
+    <div class="actions">
+        <button type="button" class="btn btn-default btn-prev">
+            <span class="glyphicon glyphicon-arrow-left"></span>Prev
+        </button>
+        <button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </button>
+    </div> */
+    ?>
+    <div class="step-content">
+        <div class="step-pane active">
+            <?= $content ?>
+        </div>
+    </div>
+</div>
