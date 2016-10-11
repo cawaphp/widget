@@ -276,7 +276,7 @@ class MapStatic extends HtmlElement
 
         $points = [];
 
-        for ($i = 0; $i <= 360; $i += $detail) :
+        for ($i = 0; $i <= 360; $i += $detail) {
             $brng = $i * $pi / 180;
 
             $pLat = asin(sin($lat) * cos($d) + cos($lat) * sin($d) * cos($brng));
@@ -284,7 +284,7 @@ class MapStatic extends HtmlElement
             $pLat = ($pLat * 180) / $pi;
 
             $points[] = [$pLat, $pLng];
-        endfor;
+        }
 
         return $this->encodePoints($points);
     }
