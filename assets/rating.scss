@@ -10,14 +10,15 @@ $ratings-on-shadow: $ratings-off-shadow !default;
     margin: 0 auto;
     position: relative;
     padding: 0;
+    display: inline-block;
 
-    > div > a,
-    > div > span {
+    > span > a,
+    > span > span {
         color: $ratings-off-color;
         text-shadow: $ratings-off-shadow;
     }
 
-    > div > a {
+    > span > a {
         cursor: pointer;
         text-decoration: none;
     }
@@ -33,14 +34,14 @@ $ratings-on-shadow: $ratings-off-shadow !default;
         padding: 0;
         position: absolute;
         z-index: 1;
-        display: block;
+        display: inline-block;
         top: 0;
         left: 0;
         overflow: hidden;
     }
     > .bottom {
         padding: 0;
-        display: block;
+        display: inline-block;
         z-index: 0;
     }
 }

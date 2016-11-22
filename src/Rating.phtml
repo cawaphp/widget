@@ -17,12 +17,12 @@
  * @var string $widgetOptions
  */
 ?>
-<div class="cawa-rating<?= $readOnly ? ' readOnly' : '' ?>">
-    <div class="top" style="width: <?= $note ?>%">
+<span class="cawa-rating<?= $readOnly ? ' readOnly' : '' ?>">
+    <span class="top" style="width: <?= $note ?>%">
         <?php for($i=0; $i<$count; $i++): ?><<?= !$readOnly ? 'a' : 'span' ?>>★</<?= !$readOnly ? 'a' : 'span' ?>><?php endfor; ?>
-    </div>
-    <div class="bottom">
+    </span>
+    <span class="bottom">
         <?php for($i=0; $i<$count; $i++): ?><<?= !$readOnly ? 'a' : 'span' ?>>★</<?= !$readOnly ? 'a' : 'span' ?>><?php endfor; ?>
-    </div>
-</div>
+    </span>
+</span>
 <?= $widgetOptions ?>
