@@ -1,9 +1,8 @@
 require([
     "jquery",
     "cawaphp/cawa/assets/widget",
-    "lodash",
     "google-maps"
-], function($, $$, _, GoogleMapsLoader)
+], function($, $$, GoogleMapsLoader)
 {
     $.widget("cawa.google-map", $.cawa.widget, {
 
@@ -114,9 +113,9 @@ require([
 
             var bounds = new google.maps.LatLngBounds();
 
-            _.forOwn(self._shapes, function(shapes, type)
+            $.forEach(self._shapes, function(shapes, type)
             {
-               _.each(shapes, function (shape, key)
+               $.forEach(shapes, function (shape, key)
                {
                    if (shape.getBounds != undefined) {
                        bounds.union(shape.getBounds());

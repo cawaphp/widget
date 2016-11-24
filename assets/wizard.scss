@@ -73,7 +73,7 @@ $wizard-step-active-text: $state-info-text !default;
             background: $gray-lighter;
 
             &, a {
-                color: $gray;
+                color: $text-color;
                 cursor: not-allowed;
             }
 
