@@ -50,7 +50,7 @@ require([
                 self.addShape(type, value);
             });
 
-            google.maps.event.addDomListener(window, "resize", $.proxy(self._fit, self));
+            google.maps.event.addDomListener(window, "resize", $.proxy(self.fit, self));
             self.fit();
         },
 
