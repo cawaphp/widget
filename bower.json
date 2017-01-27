@@ -21,6 +21,7 @@
     "dependencies": {
         "slick-carousel": "^1.6.0",
         "google-maps": "^3.2.1",
-        "perfect-scrollbar": "^0.6.12"
+        "perfect-scrollbar": "^0.6.12",
+        "tether-shepherd": "^1.8.1"
     }
 }
