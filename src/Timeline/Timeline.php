@@ -17,7 +17,6 @@ use Cawa\Controller\ViewDataTrait;
 use Cawa\Date\DateTime;
 use Cawa\Renderer\ContainerTrait;
 use Cawa\Renderer\HtmlElement;
-use Cawa\Renderer\Phtml;
 use Cawa\Renderer\PhtmlHtmlElement;
 
 /**
@@ -103,15 +102,13 @@ class Timeline extends PhtmlHtmlElement
      */
     public function render()
     {
-        usort($this->elements, function(Panel $a, Panel $b)
-        {
+        usort($this->elements, function (Panel $a, Panel $b) {
             return $a->getDate()->getTimestamp() == $b->getDate()->getTimestamp() ? 0 :
                 ($a->getDate()->getTimestamp() > $b->getDate()->getTimestamp() ? 1 : -1);
         });
 
         if ($this->sortDesc) {
             $this->elements = array_reverse($this->elements);
-
         }
 
         $content = '';
@@ -119,7 +116,6 @@ class Timeline extends PhtmlHtmlElement
 
         /** @var Panel $element */
         foreach ($this->elements as $element) {
-
             if (is_null($previousDate) || !$element->getDate()->isSameDay($previousDate)) {
                 $content .= (new HtmlElement('<div>'))
                     ->addClass('date')

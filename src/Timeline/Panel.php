@@ -129,7 +129,7 @@ class Panel extends \Cawa\Bootstrap\Components\Panel
 
             if ($this->getTitle()) {
                 $this->setTitle($time . $this->getTitle());
-            } else if ($this->getContent()) {
+            } elseif ($this->getContent()) {
                 $this->setContent($time . $this->getContent());
             } else {
                 $this->container->addFirst(new Element($time));
