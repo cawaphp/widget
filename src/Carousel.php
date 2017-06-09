@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace Cawa\Widget;
 
@@ -66,7 +66,36 @@ class Carousel extends HtmlContainer
     }
 
     /**
-     * Show dot indicators
+     * Number of slides to scroll.
+     *
+     * @param int $slide
+     *
+     * @return $this|self
+     */
+    public function setSlidesToScroll(int $slide) : self
+    {
+        $this->widgetOptions->addData('slidesToScroll', $slide);
+
+        return $this;
+    }
+
+
+    /**
+     * Number of slides to show.
+     *
+     * @param int $slide
+     *
+     * @return $this|self
+     */
+    public function setSlidesToShow(int $slide) : self
+    {
+        $this->widgetOptions->addData('slidesToShow', $slide);
+
+        return $this;
+    }
+
+    /**
+     * Show dot indicators.
      *
      * @param bool $dots
      *
@@ -74,13 +103,13 @@ class Carousel extends HtmlContainer
      */
     public function setDots(bool $dots = false) : self
     {
-        $this->widgetOptions->addData('slidesPerRow', $dots);
+        $this->widgetOptions->addData('dots', $dots);
 
         return $this;
     }
 
     /**
-     * Display Prev/Next Arrows
+     * Display Prev/Next Arrows.
      *
      * @param bool $arrows
      *
@@ -94,7 +123,7 @@ class Carousel extends HtmlContainer
     }
 
     /**
-     * Enables Autoplay
+     * Enables Autoplay.
      *
      * @param bool $autoplay
      *
@@ -108,7 +137,7 @@ class Carousel extends HtmlContainer
     }
 
     /**
-     * Infinite loop sliding
+     * Infinite loop sliding.
      *
      * @param bool $infinite
      *
@@ -137,7 +166,7 @@ class Carousel extends HtmlContainer
     }
 
     /**
-     * Vertical slide mode
+     * Vertical slide mode.
      *
      * @param bool $vertical
      *
@@ -146,6 +175,21 @@ class Carousel extends HtmlContainer
     public function setVertical(bool $vertical = true) : self
     {
         $this->widgetOptions->addData('vertical', $vertical);
+
+        return $this;
+    }
+
+
+    /**
+     * Variable with mode.
+     *
+     * @param bool $value
+     *
+     * @return $this|self
+     */
+    public function setVariableWidth(bool $value = true) : self
+    {
+        $this->widgetOptions->addData('variableWidth', $value);
 
         return $this;
     }

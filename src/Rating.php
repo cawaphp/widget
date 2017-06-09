@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace Cawa\Widget;
 
@@ -81,7 +81,6 @@ class Rating extends Phtml
     }
 
     /**
-     * @return null
      */
     public function getUrl()
     {
@@ -101,7 +100,6 @@ class Rating extends Phtml
     }
 
     /**
-     * @return null
      */
     public function getMethod()
     {
@@ -121,7 +119,6 @@ class Rating extends Phtml
     }
 
     /**
-     * @return null
      */
     public function getQuery()
     {

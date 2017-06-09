@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace Cawa\Widget\GoogleMap;
 
@@ -133,7 +133,7 @@ class MapStatic extends HtmlElement
     }
 
     /**
-     * Defines the rectangular dimensions of the map image
+     * Defines the rectangular dimensions of the map image.
      *
      * @param int $width
      * @param int $height

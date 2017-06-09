@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace Cawa\Widget\GoogleMap\Shapes;
 
@@ -76,7 +76,7 @@ class Circle extends AbstractShape
     protected $radius;
 
     /**
-     * The radius in meters on the Earth's surface
+     * The radius in meters on the Earth's surface.
      *
      * @return float
      */
@@ -86,7 +86,7 @@ class Circle extends AbstractShape
     }
 
     /**
-     * The radius in meters on the Earth's surface
+     * The radius in meters on the Earth's surface.
      *
      * @param float $radius
      *
