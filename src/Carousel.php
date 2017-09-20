@@ -79,7 +79,6 @@ class Carousel extends HtmlContainer
         return $this;
     }
 
-
     /**
      * Number of slides to show.
      *
@@ -178,7 +177,6 @@ class Carousel extends HtmlContainer
 
         return $this;
     }
-
 
     /**
      * Variable with mode.
