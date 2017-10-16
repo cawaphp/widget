@@ -17,14 +17,24 @@ use Cawa\Controller\ViewController;
 use Cawa\Renderer\Container;
 use Cawa\Renderer\Element;
 use Cawa\Renderer\HtmlContainer;
+use Cawa\Renderer\HtmlElement;
 use Cawa\Renderer\WidgetOption;
 
 class Carousel extends HtmlContainer
 {
+    const PAGINATION_TYPE_BULLETS = 'bullets';
+    const PAGINATION_TYPE_FRACTION = 'fraction';
+    const PAGINATION_TYPE_PROGRESSBAR = 'progressbar';
+
     /**
      * @var WidgetOption
      */
     private $widgetOptions;
+
+    /**
+     * @var HtmlContainer
+     */
+    protected $wrapper;
 
     /**
      * {@inheritdoc}
@@ -32,79 +42,12 @@ class Carousel extends HtmlContainer
     public function __construct()
     {
         parent::__construct('<div>');
-        $this->addClass('cawa-carousel');
+        $this->addClass('cawa-carousel swiper-container');
         $this->widgetOptions = new WidgetOption();
-    }
 
-    /**
-     * Setting this to more than 1 initializes grid mode.
-     * Use setSlidesPerRow to set how many slides should be in each row.
-     *
-     * @param int $row
-     *
-     * @return $this|self
-     */
-    public function setRows(int $row) : self
-    {
-        $this->widgetOptions->addData('rows', $row);
-
-        return $this;
-    }
-
-    /**
-     * With grid mode intialized via the rows option, this sets how many slides are in each grid row.
-     *
-     * @param int $slide
-     *
-     * @return $this|self
-     */
-    public function setSlidesPerRow(int $slide) : self
-    {
-        $this->widgetOptions->addData('slidesPerRow', $slide);
-
-        return $this;
-    }
-
-    /**
-     * Number of slides to scroll.
-     *
-     * @param int $slide
-     *
-     * @return $this|self
-     */
-    public function setSlidesToScroll(int $slide) : self
-    {
-        $this->widgetOptions->addData('slidesToScroll', $slide);
-
-        return $this;
-    }
-
-    /**
-     * Number of slides to show.
-     *
-     * @param int $slide
-     *
-     * @return $this|self
-     */
-    public function setSlidesToShow(int $slide) : self
-    {
-        $this->widgetOptions->addData('slidesToShow', $slide);
-
-        return $this;
-    }
-
-    /**
-     * Show dot indicators.
-     *
-     * @param bool $dots
-     *
-     * @return $this|self
-     */
-    public function setDots(bool $dots = false) : self
-    {
-        $this->widgetOptions->addData('dots', $dots);
-
-        return $this;
+        parent::add($this->wrapper = (new HtmlContainer('<div>'))
+            ->addClass('swiper-wrapper')
+        );
     }
 
     /**
@@ -114,9 +57,100 @@ class Carousel extends HtmlContainer
      *
      * @return $this|self
      */
-    public function setArrows(bool $arrows = false) : self
+    public function setArrows(bool $arrows = true) : self
     {
-        $this->widgetOptions->addData('arrows', $arrows);
+        if ($arrows) {
+            parent::add((new HtmlElement('<div>'))
+                ->addClass('swiper-button-prev')
+            );
+
+            parent::add((new HtmlElement('<div>'))
+                ->addClass('swiper-button-next')
+            );
+        } else {
+            /** @var HtmlElement $element */
+            foreach ($this->elements as $index => $element) {
+                if ($element->hasClass('swiper-button-prev') || $element->hasClass('swiper-button-next')) {
+                    unset($this->elements[$index]);
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Display Pagination
+     *
+     * @param bool $value
+     *
+     * @return $this|self
+     */
+    public function setPagination(bool $value = true) : self
+    {
+        if ($value) {
+            parent::add((new HtmlElement('<div>'))
+                ->addClass('swiper-pagination')
+            );
+
+        } else {
+            /** @var HtmlElement $element */
+            foreach ($this->elements as $index => $element) {
+                if ($element->hasClass('swiper-pagination')) {
+                    unset($this->elements[$index]);
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this|self
+     */
+    public function setPaginationClickable(bool $value = true) : self
+    {
+        $this->widgetOptions->addData('plugin', ['pagination' => ['clickable' => $value]]);
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this|self
+     */
+    public function setPaginationType(string $value) : self
+    {
+        $this->widgetOptions->addData('plugin', ['pagination' => ['type' => $value]]);
+
+        return $this;
+    }
+
+    /**
+     * Display Pagination
+     *
+     * @param bool $value
+     *
+     * @return $this|self
+     */
+    public function setScrollbar(bool $value = true) : self
+    {
+        if ($value) {
+            parent::add((new HtmlElement('<div>'))
+                ->addClass('swiper-scrollbar')
+            );
+
+        } else {
+            /** @var HtmlElement $element */
+            foreach ($this->elements as $index => $element) {
+                if ($element->hasClass('swiper-scrollbar')) {
+                    unset($this->elements[$index]);
+                }
+            }
+        }
 
         return $this;
     }
@@ -130,7 +164,7 @@ class Carousel extends HtmlContainer
      */
     public function setAutoplay(bool $autoplay = true) : self
     {
-        $this->widgetOptions->addData('autoplay', $autoplay);
+        $this->widgetOptions->addData('plugin', ['autoplay' => $autoplay]);
 
         return $this;
     }
@@ -138,56 +172,25 @@ class Carousel extends HtmlContainer
     /**
      * Infinite loop sliding.
      *
-     * @param bool $infinite
+     * @param bool $loop
      *
      * @return $this|self
      */
-    public function setInfinite(bool $infinite = false) : self
+    public function setLoop(bool $loop = true) : self
     {
-        $this->widgetOptions->addData('infinite', $infinite);
+        $this->widgetOptions->addData('plugin', ['loop' => $loop]);
 
         return $this;
     }
 
     /**
-     * Enables centered view with partial prev/next slides.
-     * Use with odd numbered slidesToShow counts.
-     *
-     * @param bool $centerMode
+     * @param int $value
      *
      * @return $this|self
      */
-    public function setCenterMode(bool $centerMode = true) : self
+    public function setSpaceBetween(int $value) : self
     {
-        $this->widgetOptions->addData('centerMode', $centerMode);
-
-        return $this;
-    }
-
-    /**
-     * Vertical slide mode.
-     *
-     * @param bool $vertical
-     *
-     * @return $this|self
-     */
-    public function setVertical(bool $vertical = true) : self
-    {
-        $this->widgetOptions->addData('vertical', $vertical);
-
-        return $this;
-    }
-
-    /**
-     * Variable with mode.
-     *
-     * @param bool $value
-     *
-     * @return $this|self
-     */
-    public function setVariableWidth(bool $value = true) : self
-    {
-        $this->widgetOptions->addData('variableWidth', $value);
+        $this->widgetOptions->addData('plugin', ['spaceBetween' => $value]);
 
         return $this;
     }
@@ -198,7 +201,10 @@ class Carousel extends HtmlContainer
     public function add(ViewController ...$elements)
     {
         foreach ($elements as $element) {
-            parent::add((new HtmlContainer('<div>'))->add($element));
+            $this->wrapper->add((new HtmlContainer('<div>'))
+                ->addClass('swiper-slide')
+                ->add($element)
+            );
         }
 
         return $this;
@@ -210,7 +216,10 @@ class Carousel extends HtmlContainer
     public function addFirst(ViewController ...$elements)
     {
         foreach ($elements as $element) {
-            parent::addFirst((new HtmlContainer('<div>'))->add($element));
+            $this->wrapper->addFirst((new HtmlContainer('<div>'))
+                ->addClass('swiper-slide')
+                ->add($element)
+            );
         }
 
         return $this;

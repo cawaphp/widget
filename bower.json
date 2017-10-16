@@ -20,7 +20,7 @@
     ],
     "license": "GPL-3.0",
     "dependencies": {
-        "slick-carousel": "^1.6.0",
+        "swiper": "^4.0.1",
         "google-maps": "^3.2.1",
         "perfect-scrollbar": "^0.6.12",
         "tether-shepherd": "^1.8.1"
