@@ -25,6 +25,7 @@ class Carousel extends HtmlContainer
     const PAGINATION_TYPE_BULLETS = 'bullets';
     const PAGINATION_TYPE_FRACTION = 'fraction';
     const PAGINATION_TYPE_PROGRESSBAR = 'progressbar';
+    const SLIDEPERVIEW_AUTO = 'auto';
 
     /**
      * @var WidgetOption
@@ -169,6 +170,20 @@ class Carousel extends HtmlContainer
         return $this;
     }
 
+
+    /**
+     * @param int $value
+     *
+     * @return $this|self
+     */
+    public function setAutoplayDelay(int $value) : self
+    {
+        $this->widgetOptions->addData('plugin', ['autoplay' => ["delay" => $value]]);
+
+        return $this;
+    }
+
+
     /**
      * Infinite loop sliding.
      *
@@ -191,6 +206,42 @@ class Carousel extends HtmlContainer
     public function setSpaceBetween(int $value) : self
     {
         $this->widgetOptions->addData('plugin', ['spaceBetween' => $value]);
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return $this|self
+     */
+    public function setSlidesPerView(string $value) : self
+    {
+        $this->widgetOptions->addData('plugin', ['slidesPerView' => $value == self::SLIDEPERVIEW_AUTO ? $value : (int) $value]);
+
+        return $this;
+    }
+
+    /**
+     * @param int $value
+     *
+     * @return $this|self
+     */
+    public function setSlidePerGroup(int $value) : self
+    {
+        $this->widgetOptions->addData('plugin', ['slidesPerGroup' => $value]);
+
+        return $this;
+    }
+
+    /**
+     * @param bool $value
+     *
+     * @return $this|self
+     */
+    public function setCenteredSlides(bool $value) : self
+    {
+        $this->widgetOptions->addData('plugin', ['centeredSlides' => $value]);
 
         return $this;
     }
