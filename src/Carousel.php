@@ -46,6 +46,9 @@ class Carousel extends HtmlContainer
         $this->addClass('cawa-carousel swiper-container');
         $this->widgetOptions = new WidgetOption();
 
+        $this->slideContainer = (new HtmlContainer('<div>'))
+            ->addClass('swiper-slide');
+
         parent::add($this->wrapper = (new HtmlContainer('<div>'))
             ->addClass('swiper-wrapper')
         );
@@ -93,7 +96,6 @@ class Carousel extends HtmlContainer
             parent::add((new HtmlElement('<div>'))
                 ->addClass('swiper-pagination')
             );
-
         } else {
             /** @var HtmlElement $element */
             foreach ($this->elements as $index => $element) {
@@ -143,7 +145,6 @@ class Carousel extends HtmlContainer
             parent::add((new HtmlElement('<div>'))
                 ->addClass('swiper-scrollbar')
             );
-
         } else {
             /** @var HtmlElement $element */
             foreach ($this->elements as $index => $element) {
@@ -170,7 +171,6 @@ class Carousel extends HtmlContainer
         return $this;
     }
 
-
     /**
      * @param int $value
      *
@@ -178,11 +178,10 @@ class Carousel extends HtmlContainer
      */
     public function setAutoplayDelay(int $value) : self
     {
-        $this->widgetOptions->addData('plugin', ['autoplay' => ["delay" => $value]]);
+        $this->widgetOptions->addData('plugin', ['autoplay' => ['delay' => $value]]);
 
         return $this;
     }
-
 
     /**
      * Infinite loop sliding.
@@ -247,13 +246,25 @@ class Carousel extends HtmlContainer
     }
 
     /**
+     * @var HtmlContainer
+     */
+    private $slideContainer;
+
+    /**
+     * @return HtmlContainer
+     */
+    public function getSlideContainer() : HtmlContainer
+    {
+        return $this->slideContainer;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function add(ViewController ...$elements)
     {
         foreach ($elements as $element) {
-            $this->wrapper->add((new HtmlContainer('<div>'))
-                ->addClass('swiper-slide')
+            $this->wrapper->add((clone $this->slideContainer)
                 ->add($element)
             );
         }
