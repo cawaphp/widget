@@ -17,7 +17,7 @@ $timeline-circle-size: 40px !default;
         }
 
         .panel-heading.icon {
-            i {
+            > i {
                 font-size: $size / 2;
                 line-height: $size;
             }
@@ -70,7 +70,7 @@ $timeline-circle-size: 40px !default;
 
     &.no-bottom-round {
         .line {
-            &::before {
+            &::after {
                 display: none;
             }
         }
@@ -112,6 +112,11 @@ $timeline-circle-size: 40px !default;
             font-size: $font-size-small;
             color: $gray-light;
         }
+
+        &.bordered {
+            border: 1px solid gray;
+            padding: 10px;
+        }
     }
 
     .panel {
@@ -134,9 +139,14 @@ $timeline-circle-size: 40px !default;
         }
 
         .panel-heading.icon {
-            i {
+            > i {
                 vertical-align: middle;
                 margin-left: -2px;
+
+            }
+
+            span.fa-stack {
+                margin-top: 1px;
             }
 
             img {
