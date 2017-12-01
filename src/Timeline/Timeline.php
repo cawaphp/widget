@@ -98,6 +98,31 @@ class Timeline extends PhtmlHtmlElement
     }
 
     /**
+     * @var array|string
+     */
+    private $displayDate = [DateTime::DISPLAY_SHORT, null];
+
+    /**
+     * @return array|string
+     */
+    public function isDisplayTime()
+    {
+        return $this->displayDate;
+    }
+
+    /**
+     * @param array|string $displayDate
+     *
+     * @return $this|self
+     */
+    public function setDisplayDate($displayDate = null) : self
+    {
+        $this->displayDate = $displayDate;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function render()
@@ -119,7 +144,7 @@ class Timeline extends PhtmlHtmlElement
             if (is_null($previousDate) || !$element->getDate()->isSameDay($previousDate)) {
                 $content .= (new HtmlElement('<div>'))
                     ->addClass('date')
-                    ->setContent($element->getDate()->display([DateTime::DISPLAY_SHORT]))
+                    ->setContent($element->getDate()->display($this->displayDate))
                     ->render();
             }
 

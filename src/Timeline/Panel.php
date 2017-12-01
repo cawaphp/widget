@@ -58,24 +58,24 @@ class Panel extends \Cawa\Bootstrap\Components\Panel
     }
 
     /**
-     * @var bool
+     * @var array|string
      */
-    private $displayTime = true;
+    private $displayTime = [null, DateTime::DISPLAY_SHORT];
 
     /**
-     * @return bool
+     * @return array|string
      */
-    public function isDisplayTime() : bool
+    public function isDisplayTime()
     {
         return $this->displayTime;
     }
 
     /**
-     * @param bool $displayTime
+     * @param array|string $displayTime
      *
      * @return Panel
      */
-    public function setDisplayTime(bool $displayTime) : Panel
+    public function setDisplayTime($displayTime = null) : Panel
     {
         $this->displayTime = $displayTime;
 
@@ -123,7 +123,7 @@ class Panel extends \Cawa\Bootstrap\Components\Panel
         }
 
         if ($this->displayTime) {
-            $time = (new HtmlElement('<span>', $this->date->display([null, DateTime::DISPLAY_SHORT])))
+            $time = (new HtmlElement('<span>', $this->date->display($this->displayTime)))
                 ->addClass('time')
                 ->render();
 
