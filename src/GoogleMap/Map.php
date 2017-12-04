@@ -28,6 +28,11 @@ class Map extends HtmlContainer
     const TYPE_HYBRID = 'hybrid';
     const TYPE_TERRAIN = 'terrain';
 
+    const GESTUREHANDLING_COOPERATIVE = 'cooperative';
+    const GESTUREHANDLING_GREEDY = 'greedy';
+    const GESTUREHANDLING_NONE = 'none';
+    const GESTUREHANDLING_AUTO = 'auto';
+
     /**
      * @var WidgetOption
      */
@@ -39,7 +44,7 @@ class Map extends HtmlContainer
     public function __construct()
     {
         parent::__construct('<div>');
-        $this->addClass('cawa-google-map');
+        $this->addClass('cawa-google-map cw-google-map');
         $this->add((new HtmlElement('<div>')));
 
         $this->widgetOptions = new WidgetOption(['key' => DI::config()->get('googleMaps/apikey')]);
@@ -119,18 +124,25 @@ class Map extends HtmlContainer
     }
 
     /**
-     * @param bool $interaction
+     * @param bool $fit
      *
      * @return $this|self
      */
-    public function setInteraction(bool $interaction = false) : self
+    public function setFit(bool $fit = false) : self
     {
-        $this->widgetOptions->addData('map', [
-            'draggable' => $interaction,
-            'zoomControl' => $interaction,
-            'scrollwheel' => $interaction,
-            'disableDoubleClickZoom' => !$interaction,
-        ]);
+        $this->widgetOptions->addData('fit', $fit);
+
+        return $this;
+    }
+
+    /**
+     * @param string $handling
+     *
+     * @return $this|self
+     */
+    public function setGestureHandling(string $handling) : self
+    {
+        $this->widgetOptions->addData('map', ['gestureHandling' => $handling]);
 
         return $this;
     }
@@ -160,13 +172,39 @@ class Map extends HtmlContainer
     }
 
     /**
+     * @param bool $enabled
+     * @param string $imagePath
+     * @param int|null $minimumClusterSize
+     *
+     * @param int|null $maxZoom
+     *
+     * @return $this|self
+     */
+    public function setMarkerCluster(
+        bool $enabled = true,
+        string $imagePath = null,
+        int $minimumClusterSize = null,
+        int $maxZoom = null
+    ) : self
+    {
+        $this->widgetOptions->addData('markerClusterer', [
+            'enabled' => $enabled,
+            'imagePath' => $imagePath,
+            'minimumClusterSize' => $minimumClusterSize,
+            'maxZoom' => $maxZoom,
+        ]);
+
+        return $this;
+    }
+
+    /**
      * @param AbstractShape $shape
      *
      * @return $this|self
      */
     public function addShape(AbstractShape $shape)
     {
-        $this->widgetOptions->addData('shapes', [$shape]);
+        $this->widgetOptions->addData('shapes', $shape,true);
 
         return $this;
     }

@@ -69,26 +69,61 @@ class Marker extends AbstractShape implements \JsonSerializable
     }
 
     /**
-     * @var string
+     * @var array
      */
     protected $label;
 
     /**
-     * @return string
+     * @return array
      */
-    public function getLabel()
+    public function getLabel() : ?array
     {
         return $this->label;
     }
 
     /**
-     * @param string $label
+     * @param string $text
+     * @param string|null $color
      *
      * @return $this|self
      */
-    public function setLabel(string $label) : self
+    public function setLabel(string $text = null, string $color = null) : self
     {
-        $this->label = $label;
+        if (!$text) {
+            $this->label = null;
+        } else {
+            $this->label = ['text' => $text, 'color' => $color];
+        }
+
+        return $this;
+    }
+
+    /**
+     * @var array
+     */
+    protected $iconColor;
+
+    /**
+     * @return array
+     */
+    public function getIconColor() : ?array
+    {
+        return $this->iconColor;
+    }
+
+    /**
+     * @param string|null $fillColor
+     * @param string|null $strokeColor
+     *
+     * @return $this|self
+     */
+    public function setIconColor(string $fillColor = null, string $strokeColor = null) : self
+    {
+        if (!$fillColor) {
+            $this->iconColor = null;
+        } else {
+            $this->iconColor = ['fillColor' => $fillColor, 'strokeColor' => $strokeColor];
+        }
 
         return $this;
     }
@@ -126,7 +161,7 @@ class Marker extends AbstractShape implements \JsonSerializable
     /**
      * @return string
      */
-    public function getContent()
+    public function getContent() : ?string
     {
         return $this->content;
     }
@@ -136,9 +171,34 @@ class Marker extends AbstractShape implements \JsonSerializable
      *
      * @return $this|self
      */
-    public function setContent(string $content) : self
+    public function setContent(string $content = null) : self
     {
         $this->content = $content;
+
+        return $this;
+    }
+    
+    /**
+     * @var array
+     */
+    protected $data = [];
+
+    /**
+     * @return array
+     */
+    public function getData() : array
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return $this|self
+     */
+    public function setData(array $data = []) : self
+    {
+        $this->data = $data;
 
         return $this;
     }

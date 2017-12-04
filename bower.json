@@ -22,6 +22,7 @@
     "dependencies": {
         "swiper": "^4.0.1",
         "google-maps": "^3.2.1",
+        "js-marker-clusterer": "*",
         "perfect-scrollbar": "^0.6.12",
         "tether-shepherd": "^1.8.1"
     }
