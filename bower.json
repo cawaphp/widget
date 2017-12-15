@@ -24,6 +24,8 @@
         "google-maps": "^3.2.1",
         "js-marker-clusterer": "*",
         "perfect-scrollbar": "^0.6.12",
-        "tether-shepherd": "^1.8.1"
+        "tether-shepherd": "^1.8.1",
+        "hammerjs": "hammer#^2.0.8",
+        "velocity": "^1.5.0"
     }
 }
