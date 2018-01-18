@@ -18,7 +18,7 @@
         "tests",
         "src"
     ],
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-only",
     "dependencies": {
         "swiper": "^4.0.1",
         "google-maps": "^3.2.1",
