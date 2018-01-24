@@ -173,6 +173,11 @@ require([
                     google.maps.event.addDomListener(shape, "radius_changed", $.proxy(self.fit, self));
 
                     break;
+
+                case 'GeoJson':
+                    self._map.data.addGeoJson(options.geoJson);
+
+                    break;
             }
         },
 
