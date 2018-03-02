@@ -32,6 +32,10 @@ $carousel-navigation-height: 44px !default;
     .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
         background: $carousel-color;
     }
+
+    &.slide-auto .swiper-slide {
+        width: auto;
+    }
 }
 
 

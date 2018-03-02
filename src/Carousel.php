@@ -210,13 +210,19 @@ class Carousel extends HtmlContainer
     }
 
     /**
-     * @param string $value
+     * @param string|int $value
      *
      * @return $this|self
      */
-    public function setSlidesPerView(string $value) : self
+    public function setSlidesPerView($value) : self
     {
         $this->widgetOptions->addData('plugin', ['slidesPerView' => $value == self::SLIDEPERVIEW_AUTO ? $value : (int) $value]);
+
+        if ($value == self::SLIDEPERVIEW_AUTO) {
+            $this->addClass('slide-auto');
+        } else {
+            $this->removeClass('slide-auto');
+        }
 
         return $this;
     }
