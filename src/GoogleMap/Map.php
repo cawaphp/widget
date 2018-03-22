@@ -220,4 +220,16 @@ class Map extends HtmlContainer
 
         return $container->render();
     }
+
+    /**
+     * @param array $styles
+     *
+     * @return $this|self
+     */
+    public function setStyles(array $styles) : self
+    {
+        $this->widgetOptions->addData('styles', $styles);
+
+        return $this;
+    }
 }

@@ -13,8 +13,8 @@ require([
                 enabled: false,
                 imagePath: null
             },
-            map : {
-            },
+            map : {},
+            styles : {},
             shapes: []
         },
 
@@ -59,6 +59,10 @@ require([
                 self.addShape(type, value);
             });
 
+            if (self.options.styles) {
+                self._map.data.setStyle(self.options.styles);
+            }
+
             // markerClusterer
             if (self.options.markerClusterer.enabled === true && self.getShapes('Marker').length > 0) {
 
@@ -69,7 +73,6 @@ require([
                     self.options.markerClusterer
                 );
             }
-
 
             if (self.options.bounds) {
                 this.setBounds(self.options.bounds);
