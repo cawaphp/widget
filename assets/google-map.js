@@ -35,6 +35,7 @@ require([
 
             GoogleMapsLoader.KEY = this.options.key;
             GoogleMapsLoader.LANGUAGE = $.locale();
+            GoogleMapsLoader.VERSION = '3.37';
             // TODO: remove libraries, unecessary for map, but needed by google place
             GoogleMapsLoader.LIBRARIES = ['geometry', 'places'];
             GoogleMapsLoader.load(function(google) {
